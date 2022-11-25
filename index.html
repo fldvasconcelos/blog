@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+	<meta http-equiv="X-UA-Compatible" content="IE-edge">
+	<title></title>
+
+	<script type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(function(){
+			function Alterna_passw_txt() {
+				var x = $("#input_palavra").attr("type");
+				
+				if (x === "password")
+					$("#input_palavra").attr("type", "text");
+				else 
+					$("#input_palavra").attr("type", "password");				
+			}
+
+			$("#btnOlho").mousedown(function() {
+				Alterna_passw_txt();
+			});
+
+			$("#btnOlho").mouseup(function() {
+				Alterna_passw_txt();
+			});
+
+			$("#btnOlho").mouseleave(function() {				
+				$("#input_palavra").attr("type", "password");				
+			});			
+
+			$("#input_palavra").focus();
+
+			$("#div_main").on("keypress",function(e) {
+                if(e.which == 13) 
+                    Entrar_click();
+            });
+		});		
+	
+		function Cancel_click() {
+			$("#input_palavra").val(""); 	
+			window.location.href = "about:blank";
+		}
+		
+		function Entrar_click() {
+			sessionStorage.setItem("chave", $("#input_palavra").val());
+			$("#input_palavra").val(""); 
+			window.location.href="passwords.html";
+		}
+
+	</script>
+	<style>
+		body { background-color: #d5d6d2; }
+		#div_main { 
+			width: 400px;
+			height: 160px;
+			background-color: #626566;
+			padding-top: 30px;
+			padding-left: 20px;
+			border: solid 3px  #c9f649;
+			border-radius: 8px;
+			margin-top: 20px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		#titulo {
+			color: #fff;
+			background-color: #626566;
+			font-weight: 900;
+		}
+		
+		#input_palavra { 
+			width: 340px;
+			margin-top: 10px; 
+			color: #f8f536;	
+			background-color: black;	
+			font-size: 20px;	
+		}
+		
+		#btnOlho { padding-top: 4px; background-color: gray; }
+
+		#divBotoes {			
+			width: 250px;
+			margin-right: 20px;
+			float: right;
+		}
+		
+		.botao {
+			color: #fff;
+			margin-top: 30px;			
+			font-size: 20px;
+			width: 120px;
+			padding: 5px;
+			border: solid 2px #fff;	
+			border-radius: 5px;	
+			cursor: pointer;	
+		}
+
+		#btnCancel {
+			background-color: #712f02;			
+			float: left;
+		}
+		
+		#btnEntrar {
+			background-color: #2e0271;
+			margin-left: 10px;						
+		}		
+
+		.botao:hover {
+			font-weight: 900;	
+			padding: 6px;		
+      		transition: 0.7s;
+		}		
+	</style>
+</head>
+<body>
+</body>
+
+	<div id="div_main">
+		<span id="titulo">Palavra-chave para descriptografia:</span> 		
+		<input type="password" id="input_palavra" />		
+
+		<button id="btnOlho" title="Mostrar palavra">
+			<!--
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
+				class="bi bi-eye-fill" viewBox="0 0 16 16">
+				<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+				<path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+			</svg>
+			-->
+		</button>		
+		
+		<div id="divBotoes">
+			<button id="btnCancel" class="botao" onclick="Cancel_click()">Cancelar</btn>
+			<button id="btnEntrar" class="botao" onclick="Entrar_click()">Entrar</btn>
+		</div>
+	</div>
+	
+	
+</html>
